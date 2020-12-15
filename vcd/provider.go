@@ -106,6 +106,7 @@ var globalResourceMap = map[string]*schema.Resource{
 	"vcd_vapp_access_control":  resourceVcdAccessControlVapp(),        // 3.0
 	"vcd_external_network_v2":  resourceVcdExternalNetworkV2(),        // 3.0
 	"vcd_vm_sizing_policy":     resourceVcdVmSizingPolicy(),           // 3.0
+	"vcd_distributed_firewall": resourceVcdVdcDFW(),                   // 3.1
 }
 
 // Provider returns a terraform.ResourceProvider.

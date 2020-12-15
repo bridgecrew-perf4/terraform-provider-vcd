@@ -1,0 +1,11 @@
+# Build the module.
+steps:
+- name: golang
+  args: ['go', 'build', '-o', 'terraform-provider-vcd_v${TAG_NAME}', '.']
+
+- name: eu.gcr.io/sandbox-terraform-provider/test-zip-gpg
+  args: ['terraform-provider-vcd_v${TAG_NAME}', '${TAG_NAME}', 'linux','amd64'] 
+artifacts:
+  objects:
+    location: 'gs://terraform-provider-registry-sdms'
+    paths: ['terraform-provider-vcd_${TAG_NAME}_linux_amd64.zip', 'terraform-provider-vcd_${TAG_NAME}_SHA256SUMS', 'terraform-provider-vcd_${TAG_NAME}_SHA256SUMS.sig']
