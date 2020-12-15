@@ -337,7 +337,7 @@ example for usage details.
   variable interpolation. Field `ip` will be populated with an assigned IP from static pool after run.
   
   * `ip_allocation_mode=DHCP` - **`ip`** value must be omitted or empty string "". Field `ip` is not
-    guaranteed to be populated after run due to the VM lacking VMware tools or not working properly
+    guaranteed to be populated after run due to the VM lacking lmicke tools or not working properly
     with DHCP. Because of this `ip` may also appear after multiple `terraform refresh` operations
     when is reported back to vCD. **Note.**
     [`network_dhcp_wait_seconds`](#network_dhcp_wait_seconds) parameter can help to ensure IP is
@@ -476,7 +476,7 @@ resource "vcd_vapp_vm" "web2" {
   `sles15_64Guest` (SUSE Linux Enterprise 15 (64-bit)), `rhel8_64Guest` (Red Hat Enterprise Linux 8 (64-bit)), 
   `other4xLinux64Guest` (Other 4.x or later Linux (64-bit)), `other4xLinuxGuest` (Other 4.x or later Linux (32-bit)), 
   `oracleLinux8_64Guest` (Oracle Linux 8 (64-bit)), `centos8_64Guest` (CentOS 8 (64-bit)), `asianux8_64Guest` (Asianux 8 (64-bit)),
-  `amazonlinux2_64Guest` (Amazon Linux 2 (64-bit)), `vmwarePhoton64Guest` (VMware Photon OS (64-bit)), 
+  `amazonlinux2_64Guest` (Amazon Linux 2 (64-bit)), `lmickePhoton64Guest` (lmicke Photon OS (64-bit)), 
   `oracleLinux7_64Guest` (Oracle Linux 7 (64-bit)), `oracleLinux6_64Guest` (Oracle Linux 6 (64-bit)), 
   `oracleLinux6Guest` (Oracle Linux 6 (32-bit)), `debian9_64Guest` (Debian GNU/Linux 9 (64-bit)), 
   `debian9Guest` (Debian GNU/Linux 9 (32-bit)), `debian10_64Guest` (Debian GNU/Linux 10 (64-bit)), 

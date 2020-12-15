@@ -1,5 +1,3 @@
-// +build vapp vm ALL functional
-
 package vcd
 
 import (
@@ -7,7 +5,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 
-	"github.com/vmware/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
 )
 
 func init() {

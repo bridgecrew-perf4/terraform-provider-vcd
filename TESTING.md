@@ -25,7 +25,7 @@ To run the tests, your vCD needs to have the following:
     * (6) A catalog
     * (7) A vApp template in the catalog
 
-Optionally, to run tests in [go-vcloud-director](https://github.com/vmware/go-vcloud-director), you will also need one or
+Optionally, to run tests in [go-vcloud-director](https://github.com/lmicke/go-vcloud-director), you will also need one or
 two Org VDC networks and a media item.
 
 
@@ -226,7 +226,7 @@ $ go test -v .
            make testacc
            make testcatalog
  FAIL
- FAIL	github.com/vmware/terraform-provider-vcd/v2/vcd	0.017s
+ FAIL	github.com/lmicke/terraform-provider-vcd/v2/vcd	0.017s
 ```
 
 ## Adding new tests

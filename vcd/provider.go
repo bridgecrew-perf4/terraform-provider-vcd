@@ -7,11 +7,11 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/vmware/go-vcloud-director/v2/util"
+	"github.com/lmicke/go-vcloud-director/v2/util"
 )
 
 // BuildVersion holds version which is meant to be injected at build time using ldflags
-// (e.g. 'go build -ldflags="-X 'github.com/vmware/terraform-provider-vcd/v3/vcd.BuildVersion=v1.0.0'"')
+// (e.g. 'go build -ldflags="-X 'github.com/lmicke/terraform-provider-vcd/v3/vcd.BuildVersion=v1.0.0'"')
 var BuildVersion = "unset"
 
 // DataSources is a public function which allows to filter and access all defined data sources

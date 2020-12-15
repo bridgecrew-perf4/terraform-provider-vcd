@@ -221,7 +221,7 @@ func TestCustomTemplates(t *testing.T) {
 			// For some items, we want a different value for testing and for building
 			// For example, the Ova for testing might be a tiny one, while the one for
 			// building the environment would be a beefier one, which can also run the
-			// VMware tools.
+			// lmicke tools.
 			if testConfig.TestEnvBuild.ExternalNetworkStartIp == "" {
 				params["ExternalNetworkStaticStartIp"] = testConfig.Networking.ExternalIp
 				if testConfig.TestEnvBuild.ExternalNetworkEndIp == "" {

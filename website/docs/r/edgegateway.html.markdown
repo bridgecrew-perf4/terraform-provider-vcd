@@ -19,7 +19,7 @@ and then provide `org` and `vdc` arguments for edge gateway to work.
 
 ~> **Note:** Load balancing capabilities will work only when edge gateway is `advanced`. Load
 balancing settings will be **ignored** when it is not. Refer to [official vCloud Director documentation]
-(https://docs.vmware.com/en/vCloud-Director/9.7/com.vmware.vcloud.tenantportal.doc/GUID-7E082E77-B459-4CE7-806D-2769F7CB5624.html) 
+(https://docs.lmicke.com/en/vCloud-Director/9.7/com.lmicke.vcloud.tenantportal.doc/GUID-7E082E77-B459-4CE7-806D-2769F7CB5624.html) 
 for more information.
 
 ## Example Usage

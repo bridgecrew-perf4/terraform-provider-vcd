@@ -9,7 +9,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
 )
 
 var (
@@ -537,7 +537,7 @@ func TestAccVcdEdgeGatewayParallelCreation(t *testing.T) {
 // TODO external network has a bug that it uses a TypeList for `ip_scope` field. If the below two
 // network has second ip_scope defined - then vCD API orders them differently and a replacement is
 // suggested.
-// GitHUB issue - https://github.com/vmware/terraform-provider-vcd/issues/395
+// GitHUB issue - https://github.com/lmicke/terraform-provider-vcd/issues/395
 const testAccEdgeGatewayComplexNetwork = `
 resource "vcd_external_network" "{{.NewExternalNetwork}}" {
   name        = "{{.NewExternalNetworkVcd}}"

@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/vmware/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -260,7 +260,7 @@ resource "vcd_lb_app_rule" "redirect" {
   edge_gateway = "{{.EdgeGateway}}"
 
   name   = "redirect"
-  script = "acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page"
+  script = "acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page"
 }
 
 resource "vcd_lb_app_rule" "language" {

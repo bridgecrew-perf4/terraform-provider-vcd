@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
 )
 
 // getAvailableVapp collects one available Vapp to use in data source tests
@@ -32,7 +32,7 @@ func getAvailableVapp() (*govcd.VApp, error) {
 
 	for _, resourceEntities := range vdc.Vdc.ResourceEntities {
 		for _, resourceReference := range resourceEntities.ResourceEntity {
-			if resourceReference.Type == "application/vnd.vmware.vcloud.vApp+xml" {
+			if resourceReference.Type == "application/vnd.lmicke.vcloud.vApp+xml" {
 				return vdc.GetVAppByHref(resourceReference.HREF)
 			}
 		}

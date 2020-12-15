@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/vmware/go-vcloud-director/v2/types/v56"
+	"github.com/lmicke/go-vcloud-director/v2/types/v56"
 )
 
 func resourceVcdLBAppProfile() *schema.Resource {
@@ -97,7 +97,7 @@ func resourceVcdLBAppProfile() *schema.Resource {
 					" address of a client connecting to a Web server through the load balancer. " +
 					"Only applies for types HTTP and HTTPS",
 			},
-			// TODO https://github.com/vmware/terraform-provider-vcd/issues/258
+			// TODO https://github.com/lmicke/terraform-provider-vcd/issues/258
 			// This will not give much use without SSL certs being available. The only method to
 			// make use of it is by manually attaching certificates.
 			"enable_pool_side_ssl": &schema.Schema{

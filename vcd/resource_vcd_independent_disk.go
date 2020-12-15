@@ -7,8 +7,8 @@ import (
 	"text/tabwriter"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
-	"github.com/vmware/go-vcloud-director/v2/types/v56"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/types/v56"
 )
 
 func resourceVcdIndependentDisk() *schema.Resource {
@@ -111,7 +111,7 @@ var busSubTypes = map[string]string{
 	"lsilogic":    "lsilogic",
 	"lsilogicsas": "lsilogicsas",
 	"virtualscsi": "VirtualSCSI",
-	"ahci":        "vmware.sata.ahci",
+	"ahci":        "lmicke.sata.ahci",
 }
 
 var busSubTypesFromValues = map[string]string{
@@ -120,7 +120,7 @@ var busSubTypesFromValues = map[string]string{
 	"lsilogic":         "lsilogic",
 	"lsilogicsas":      "lsilogicsas",
 	"VirtualSCSI":      "VirtualSCSI",
-	"vmware.sata.ahci": "ahci",
+	"lmicke.sata.ahci": "ahci",
 }
 
 func resourceVcdIndependentDiskCreate(d *schema.ResourceData, meta interface{}) error {

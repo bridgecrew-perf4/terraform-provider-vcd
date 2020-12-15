@@ -8,8 +8,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
-	"github.com/vmware/go-vcloud-director/v2/types/v56"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/types/v56"
 )
 
 var subAllocationPool = &schema.Resource{
@@ -519,7 +519,7 @@ func resourceVcdEdgeGatewayImport(d *schema.ResourceData, meta interface{}) ([]*
 // <GatewayInterface>						<---- maps directly to `external_network` block
 // 	<Name>test_external_network</Name>
 // 	<DisplayName>test_external_network</DisplayName>
-// 	<Network href="...." id="urn:vcloud:network:144bafa4-7cbe-44de-a647-e6e045b7b8c5" type="application/vnd.vmware.admin.network+xml" name="test_external_network"></Network>
+// 	<Network href="...." id="urn:vcloud:network:144bafa4-7cbe-44de-a647-e6e045b7b8c5" type="application/vnd.lmicke.admin.network+xml" name="test_external_network"></Network>
 // 	<InterfaceType>uplink</InterfaceType>
 // 	<SubnetParticipation>					<----- maps to nested `subnet` block(s) inside `external_network`
 // 		<Gateway>192.168.30.49</Gateway>
@@ -593,7 +593,7 @@ func getGatewayInterfaceType(externalNetwork *govcd.ExternalNetwork, extInterfac
 		Network: &types.Reference{
 			HREF: externalNetwork.ExternalNetwork.HREF,
 			ID:   externalNetwork.ExternalNetwork.ID,
-			Type: "application/vnd.vmware.admin.network+xml",
+			Type: "application/vnd.lmicke.admin.network+xml",
 			Name: externalNetwork.ExternalNetwork.Name,
 		},
 		UseForDefaultRoute:  usedForDefaultRoute,

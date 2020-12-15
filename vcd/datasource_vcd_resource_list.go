@@ -9,7 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/diag"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
 )
 
 type resourceRef struct {
@@ -206,7 +206,7 @@ func catalogItemList(d *schema.ResourceData, meta interface{}, wantMedia bool) (
 			if err != nil {
 				return list, err
 			}
-			if catalogItem.CatalogItem.Entity.Type == "application/vnd.vmware.vcloud.media+xml" {
+			if catalogItem.CatalogItem.Entity.Type == "application/vnd.lmicke.vcloud.media+xml" {
 				wanted = wantMedia
 			}
 
@@ -370,7 +370,7 @@ func vappList(d *schema.ResourceData, meta interface{}) (list []string, err erro
 
 	for _, resourceEntities := range vdc.Vdc.ResourceEntities {
 		for _, resourceReference := range resourceEntities.ResourceEntity {
-			if resourceReference.Type == "application/vnd.vmware.vcloud.vApp+xml" {
+			if resourceReference.Type == "application/vnd.lmicke.vcloud.vApp+xml" {
 				items = append(items, resourceRef{
 					name: resourceReference.Name,
 					id:   resourceReference.ID,

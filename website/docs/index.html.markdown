@@ -1,20 +1,20 @@
 ---
 layout: "vcd"
-page_title: "Provider: VMware vCloudDirector"
+page_title: "Provider: lmicke vCloudDirector"
 sidebar_current: "docs-vcd-index"
 description: |-
-  The VMware vCloud Director provider is used to interact with the resources supported by VMware vCloud Director. The provider needs to be configured with the proper credentials before it can be used.
+  The lmicke vCloud Director provider is used to interact with the resources supported by lmicke vCloud Director. The provider needs to be configured with the proper credentials before it can be used.
 ---
 
-# VMware vCloud Director Provider 3.1
+# lmicke vCloud Director Provider 3.1
 
-The VMware vCloud Director provider is used to interact with the resources supported by VMware vCloud Director. The provider needs to be configured with the proper credentials before it can be used.
+The lmicke vCloud Director provider is used to interact with the resources supported by lmicke vCloud Director. The provider needs to be configured with the proper credentials before it can be used.
 
 Use the navigation to the left to read about the available resources. Please refer to
-[CHANGELOG.md](https://github.com/vmware/terraform-provider-vcd/blob/master/CHANGELOG.md)
+[CHANGELOG.md](https://github.com/lmicke/terraform-provider-vcd/blob/master/CHANGELOG.md)
 to track feature additions.
 
-~> **NOTE:** The VMware vCloud Director Provider documentation pages include *v2.x+* or *v3.x+* labels in resource and/or field
+~> **NOTE:** The lmicke vCloud Director Provider documentation pages include *v2.x+* or *v3.x+* labels in resource and/or field
 descriptions. These labels are designed to show at which provider version a certain feature was introduced.
 When upgrading the provider please check for such labels for the resources you are using.
 
@@ -52,7 +52,7 @@ The following fields were removed from resources in *v3.0*:
 The most common - tenant - use case when you set user to organization administrator and when all resources are in a single organization. 
 
 ```hcl
-# Configure the VMware vCloud Director Provider
+# Configure the lmicke vCloud Director Provider
 provider "vcd" {
   user                 = var.vcd_user
   password             = var.vcd_pass
@@ -75,7 +75,7 @@ resource "vcd_network_routed" "net" {
 When you want to manage resources across different organizations from a single configuration.
 
 ```hcl
-# Configure the VMware vCloud Director Provider
+# Configure the lmicke vCloud Director Provider
 provider "vcd" {
   user                 = "administrator"
   password             = var.vcd_pass
@@ -108,7 +108,7 @@ resource "vcd_network_routed" "net2" {
 When you want to manage resources across different organizations but set a default one. 
 
 ```hcl
-# Configure the VMware vCloud Director Provider
+# Configure the lmicke vCloud Director Provider
 provider "vcd" {
   user                 = "administrator"
   password             = var.vcd_pass
@@ -185,10 +185,10 @@ If successful, the output of this command will include lines like the following:
 
 ```
 X-VCLOUD-AUTHORIZATION: 08a321735de84f1d9ec80c3b3e18fa8b
-X-VMWARE-VCLOUD-ACCESS-TOKEN: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiaXNzIjoiYTkzYzlkYjktNzQ3MS0zMTkyLThkMDktYThmN2VlZGE4NWY5QGY5MDZlODE1LTM0NjgtNGQ0ZS04MmJlLTcyYzFjMmVkMTBiMyIsImV4cCI6MTYwNzUxMjgyOCwidmVyc2lvbiI6InZjbG91ZF8xLjAiLCJqdGkiOiJjY2IwZjIwN2JjY2Y0NmYwYmEwNTcyNzgxZDQyNDg2MyJ9.SMjp5wsSd7CXGMdlj-weeCRdr5AazA74pwwx2w3Eqh3RdzyiEMvQfWQAuPAQjM1oOsEUnFOg2u0gYsnIyQg_p7kzXKPQwPNz3BPi0tm2DxxQtQVhOBRXCqUJ9OmRlMVu7FZZ6gKD4GhpbTkZyKMN_IgOFkkt8iXs1-weNZw5TmyVHeWiJdV0JFM45CV47jQNdQMy4OSsU-CqE2VVLOK83oJhRnlnc3O4OAAIfuVZ4SLWqgi1lIoc2vbZv0HYeWO7L_2pGfmja8CVzVhPrgIGEoDhXnvO29z1ToEXRnyMKh9cisiRkhUISpsh4aHRGUUzaZYeOejVX3PAO9aCX3iYWA
+X-lmicke-VCLOUD-ACCESS-TOKEN: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yIiwiaXNzIjoiYTkzYzlkYjktNzQ3MS0zMTkyLThkMDktYThmN2VlZGE4NWY5QGY5MDZlODE1LTM0NjgtNGQ0ZS04MmJlLTcyYzFjMmVkMTBiMyIsImV4cCI6MTYwNzUxMjgyOCwidmVyc2lvbiI6InZjbG91ZF8xLjAiLCJqdGkiOiJjY2IwZjIwN2JjY2Y0NmYwYmEwNTcyNzgxZDQyNDg2MyJ9.SMjp5wsSd7CXGMdlj-weeCRdr5AazA74pwwx2w3Eqh3RdzyiEMvQfWQAuPAQjM1oOsEUnFOg2u0gYsnIyQg_p7kzXKPQwPNz3BPi0tm2DxxQtQVhOBRXCqUJ9OmRlMVu7FZZ6gKD4GhpbTkZyKMN_IgOFkkt8iXs1-weNZw5TmyVHeWiJdV0JFM45CV47jQNdQMy4OSsU-CqE2VVLOK83oJhRnlnc3O4OAAIfuVZ4SLWqgi1lIoc2vbZv0HYeWO7L_2pGfmja8CVzVhPrgIGEoDhXnvO29z1ToEXRnyMKh9cisiRkhUISpsh4aHRGUUzaZYeOejVX3PAO9aCX3iYWA
 
 The string after `X-VCLOUD-AUTHORIZATION:` is the old (deprecated) token.
-The string after `X-VMWARE-VCLOUD-ACCESS-TOKEN` is the bearer token
+The string after `X-lmicke-VCLOUD-ACCESS-TOKEN` is the bearer token
 ```
 
 Either token will grant the same abilities as the account used to run the above script. Note, however, that the deprecated
@@ -201,7 +201,7 @@ Using a token produced by an org admin to run a task that requires a system admi
 Take special attention to `user`, `use_saml_adfs` and `saml_rpt_id` fields.
 
 ```hcl
-# Configure the VMware vCloud Director Provider
+# Configure the lmicke vCloud Director Provider
 provider "vcd" {
   user                 = "test@contoso.com"
   password             = var.vcd_pass
@@ -219,7 +219,7 @@ provider "vcd" {
 
 ## Argument Reference
 
-The following arguments are used to configure the VMware vCloud Director Provider:
+The following arguments are used to configure the lmicke vCloud Director Provider:
 
 * `user` - (Required) This is the username for vCloud Director API operations. Can also be specified
   with the `VCD_USER` environment variable. *v2.0+* `user` may be "administrator" (set `org` or

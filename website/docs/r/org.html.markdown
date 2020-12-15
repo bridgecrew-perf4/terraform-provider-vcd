@@ -155,7 +155,7 @@ at this stage will show the difference between the minimal configuration file an
 
 ## Sources
 
-* [OrgType](https://code.vmware.com/apis/287/vcloud#/doc/doc/types/OrgType.html)
-* [ReferenceType](https://code.vmware.com/apis/287/vcloud#/doc/doc/types/ReferenceType.html)
-* [Org deletion](https://code.vmware.com/apis/287/vcloud#/doc/doc/operations/DELETE-Organization.html)
+* [OrgType](https://code.lmicke.com/apis/287/vcloud#/doc/doc/types/OrgType.html)
+* [ReferenceType](https://code.lmicke.com/apis/287/vcloud#/doc/doc/types/ReferenceType.html)
+* [Org deletion](https://code.lmicke.com/apis/287/vcloud#/doc/doc/operations/DELETE-Organization.html)
 

@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-	"github.com/vmware/go-vcloud-director/v2/types/v56"
+	"github.com/lmicke/go-vcloud-director/v2/types/v56"
 )
 
 func resourceVcdLBAppRule() *schema.Resource {
@@ -201,7 +201,7 @@ func getLBAppRuleType(d *schema.ResourceData) (*types.LbAppRule, error) {
 // HEREDOC syntax is helpful.
 // This terraform configuration
 // script = <<-EOT
-//   acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page
+//   acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page
 //   acl other_page2 url_beg / other2 redirect location https://www.other2.com/ ifother_page2
 //   acl hello payload(0,6) -m bin 48656c6c6f0a
 //   EOT

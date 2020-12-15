@@ -111,7 +111,7 @@
     "uploadPieceSize": 5,
     "uploadProgress": true,
     "//": "Link will be used to download OVA for tests",
-    "ovaDownloadUrl": "http://dl.bintray.com/vmware/photon/3.0/GA/ova/photon-hw13_uefi-3.0-26156e2.ova",
+    "ovaDownloadUrl": "http://dl.bintray.com/lmicke/photon/3.0/GA/ova/photon-hw13_uefi-3.0-26156e2.ova",
     "//": "Name for downloaded file which will be saved in test-resources folder",
     "ovaTestFileName": "photon.ova",
     "//": "Won't destroy resources created for test suite. Will be reused next time running tests",

@@ -70,7 +70,7 @@ function terraform_binary_path {
     # if terraform executable is 0.13+, we use the new path
     if [[ $tversion_major -gt 0 || $tversion_major -eq 0 && $tversion_minor -gt 12 ]]
     then
-        target_dir=.terraform.d/plugins/registry.terraform.io/vmware/vcd/$bare_version/$arch
+        target_dir=.terraform.d/plugins/registry.terraform.io/lmicke/vcd/$bare_version/$arch
     fi
 
     echo $target_dir
@@ -258,7 +258,7 @@ function check_terraform_version {
 terraform {
   required_providers {
     vcd = {
-      source = "vmware/vcd"
+      source = "lmicke/vcd"
     }
   }
   # required_version = ">= 0.13"

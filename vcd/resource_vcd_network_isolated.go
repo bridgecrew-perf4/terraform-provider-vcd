@@ -7,8 +7,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
-	"github.com/vmware/go-vcloud-director/v2/types/v56"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/types/v56"
 )
 
 func resourceVcdNetworkIsolated() *schema.Resource {
@@ -197,7 +197,7 @@ func resourceVcdNetworkIsolatedCreate(d *schema.ResourceData, meta interface{}) 
 	}
 
 	orgVDCNetwork := &types.OrgVDCNetwork{
-		Xmlns:       "http://www.vmware.com/vcloud/v1.5",
+		Xmlns:       "http://www.lmicke.com/vcloud/v1.5",
 		Name:        networkName,
 		Description: d.Get("description").(string),
 		Configuration: &types.NetworkConfiguration{

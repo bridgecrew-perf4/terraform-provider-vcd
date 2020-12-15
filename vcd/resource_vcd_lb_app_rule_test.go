@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/vmware/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/resource"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
@@ -21,7 +21,7 @@ func TestAccVcdLBAppRule(t *testing.T) {
 	// This variable is established for easier test comparison and is wrapped into HEREDOC syntax
 	// in the `params` map using type `template.HTML` so that template engine does not
 	// escape HEREDOC syntax <<- characters.
-	MultiLineScript := `acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page
+	MultiLineScript := `acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page
 acl other_page2 url_beg / other2 redirect location https://www.other2.com/ ifother_page2
 `
 
@@ -31,11 +31,11 @@ acl other_page2 url_beg / other2 redirect location https://www.other2.com/ ifoth
 		"Vdc":              testConfig.VCD.Vdc,
 		"EdgeGateway":      testConfig.Networking.EdgeGateway,
 		"AppRuleName":      t.Name(),
-		"SingleLineScript": "acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page",
+		"SingleLineScript": "acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page",
 		"MultilineScript": template.HTML(`<<-EOT
 ` + MultiLineScript + `EOT`),
 		"MultilineFailScript": template.HTML(`<<-EOT
-			acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page
+			acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page
 			acl other_page2 url_beg / other2 redirect location https://www.other2.com/ ifother_page2
 			acl en req.fhdr(accept-language),language(es;fr;en) -m str en
 			use_backend english if en

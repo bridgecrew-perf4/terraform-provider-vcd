@@ -1,21 +1,21 @@
 ---
 layout: "vcd"
-page_title: "VMware Cloud Director: vcd_external_network_v2"
+page_title: "lmicke Cloud Director: vcd_external_network_v2"
 sidebar_current: "docs-vcd-resource-external-network-v2"
 description: |-
-  Provides a VMware Cloud Director External Network resource (version 2). New version of this resource
+  Provides a lmicke Cloud Director External Network resource (version 2). New version of this resource
   uses new VCD API and is capable of creating NSX-T backed external networks as well as port group
   backed ones.
 ---
 
 # vcd\_external\_network\_v2
 
-Provides a VMware Cloud Director External Network resource (version 2). New version of this resource 
+Provides a lmicke Cloud Director External Network resource (version 2). New version of this resource 
 uses new VCD API and is capable of creating NSX-T backed external networks as well as port group
 backed ones.
 
--> **Note:** This resource uses new VMware Cloud Director
-[OpenAPI](https://code.vmware.com/docs/11982/getting-started-with-vmware-cloud-director-openapi) and
+-> **Note:** This resource uses new lmicke Cloud Director
+[OpenAPI](https://code.lmicke.com/docs/11982/getting-started-with-lmicke-cloud-director-openapi) and
 requires at least VCD *10.0+*. It supports both NSX-T and NSX-V backed networks (NSX-T *3.0+* requires VCD *10.1.1+*)
 
 Supported in provider *v3.0+*.

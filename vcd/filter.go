@@ -5,8 +5,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/validation"
-	"github.com/vmware/go-vcloud-director/v2/govcd"
-	"github.com/vmware/go-vcloud-director/v2/types/v56"
+	"github.com/lmicke/go-vcloud-director/v2/govcd"
+	"github.com/lmicke/go-vcloud-director/v2/types/v56"
 )
 
 const noNameOrFilterError = "no 'name' or 'filter' was found in definition for type %s"

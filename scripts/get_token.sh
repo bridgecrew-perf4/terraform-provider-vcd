@@ -21,10 +21,10 @@ curl -I -k --header "Accept: application/*;version=32.0" \
 
 # If successful, the output of this command will include lines like the following
 # X-VCLOUD-AUTHORIZATION: 08a321735de84f1d9ec80c3b3e18fa8b
-# X-VMWARE-VCLOUD-ACCESS-TOKEN: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yI[562 more characters]
+# X-lmicke-VCLOUD-ACCESS-TOKEN: eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJhZG1pbmlzdHJhdG9yI[562 more characters]
 #
 # The string after `X-VCLOUD-AUTHORIZATION:` is the old (deprecated) token.
-# The 612-character string after `X-VMWARE-VCLOUD-ACCESS-TOKEN` is the bearer token
+# The 612-character string after `X-lmicke-VCLOUD-ACCESS-TOKEN` is the bearer token
 
 # For VCD version 10.0+, you can use one of the following commands instead.
 
