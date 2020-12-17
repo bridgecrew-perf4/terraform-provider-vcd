@@ -257,7 +257,14 @@ github.com/kylelemons/godebug v1.1.0 h1:RPNrshWIDI6G2gRW9EHilWtl7Z6Sb1BR0xunSBf0
 github.com/kylelemons/godebug v1.1.0/go.mod h1:9/0rRGxNHcop5bhtWyNeEfOS8JIWk580+fNqagV/RAw=
 github.com/lmicke/go-vcloud-director/v2 v2.10.0-alpha.4 h1:AjMZWwcx897hAb+W0l3YDUc5uniX1Jyy47G/zplR1bY=
 github.com/lmicke/go-vcloud-director/v2 v2.10.0-alpha.4/go.mod h1:czvTQZlB4/WsOsL7rMVCb+SYAPJhx/dYoS/Sk7rc/O0=
+github.com/lmicke/go-vcloud-director/v2 v2.11.1-rc h1:aWKnR61/eTc0mGqWsWm2As9xOTueK1SUWGPGcZojdiY=
 github.com/lmicke/go-vcloud-director/v2 v2.11.1-rc/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
+github.com/lmicke/go-vcloud-director/v2 v2.11.3-rc h1:/PtZIxnzLtEq7PHzrD0msXKTM3jHXYtFgcjbI4lPFpQ=
+github.com/lmicke/go-vcloud-director/v2 v2.11.3-rc/go.mod h1:p5C0EBPwE6SJ59E0MBM0mgpoY/qcTnQAgm7Gh2Cjbs8=
+github.com/lmicke/go-vcloud-director/v2 v2.11.4-rc h1:ZPAt3Nv0KgtQwZGvxlMb2Ic1B2xvl+nPbWxJfgV3Jxw=
+github.com/lmicke/go-vcloud-director/v2 v2.11.4-rc/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
+github.com/lmicke/go-vcloud-director/v2 v2.11.4-rc.0.20201216065958-1dfd177ed69d h1:DRMFjoQXu9Pt+Bj45l3ngvh2UJOFgkluK8lqw1PuAQc=
+github.com/lmicke/go-vcloud-director/v2 v2.11.4-rc.0.20201216065958-1dfd177ed69d/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
 github.com/mattn/go-colorable v0.0.9 h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRUIY4=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-isatty v0.0.3/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
@@ -323,6 +330,9 @@ github.com/vmihailenco/msgpack v3.3.3+incompatible h1:wapg9xDUZDzGCNFlwc5SqI1rvc
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
+github.com/vmware/go-vcloud-director v2.0.0+incompatible h1:3B121XZVdEOxRhv5ARswKVxXt4KznAbun8GoXNbbZWs=
+github.com/vmware/go-vcloud-director/v2 v2.9.0 h1:6HxKdIwbRtTkw+up829ZRCTaC1EyuAqSm5jRnd9zHQ4=
+github.com/vmware/go-vcloud-director/v2 v2.9.0/go.mod h1:czvTQZlB4/WsOsL7rMVCb+SYAPJhx/dYoS/Sk7rc/O0=
 github.com/xanzy/ssh-agent v0.2.1 h1:TCbipTQL2JiiCprBWx9frJ2eJlCYT00NmctrHxVAr70=
 github.com/xanzy/ssh-agent v0.2.1/go.mod h1:mLlQY/MoOhWBj+gOGMQkOeiEvkx+8pJSI+0Bx9h2kr4=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=

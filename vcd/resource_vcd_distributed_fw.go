@@ -68,7 +68,9 @@ func resourceVcdDFWCreate(d *schema.ResourceData, meta interface{}) error {
 	dfw := govcd.NewDFW(&vcdClient.Client)
 
 	//Enable DFW, doesnt matter if it is already enabled.
-	err := dfw.EnableDistributedFirewall(d.Get("vdc_id").(string))
+	url, err := dfw.EnableDistributedFirewall(d.Get("vdc_id").(string))
+	log.Printf("[DEBUG] TF: Distributed Firewall URL: %s", url)
+	log.Printf("[DEBUG] %v", dfw.Client)
 	if err != nil {
 		return err
 	}
