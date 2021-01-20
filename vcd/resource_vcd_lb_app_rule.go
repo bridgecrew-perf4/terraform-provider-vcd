@@ -201,7 +201,7 @@ func getLBAppRuleType(d *schema.ResourceData) (*types.LbAppRule, error) {
 // HEREDOC syntax is helpful.
 // This terraform configuration
 // script = <<-EOT
-//   acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page
+//   acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page
 //   acl other_page2 url_beg / other2 redirect location https://www.other2.com/ ifother_page2
 //   acl hello payload(0,6) -m bin 48656c6c6f0a
 //   EOT

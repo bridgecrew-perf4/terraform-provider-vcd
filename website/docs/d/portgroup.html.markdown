@@ -1,6 +1,6 @@
 ---
 layout: "vcd"
-page_title: "lmicke Cloud Director: vcd_portgroup"
+page_title: "vmware Cloud Director: vcd_portgroup"
 sidebar_current: "docs-vcd-data-source-portgroup"
 description: |-
   Provides a data source for available vCenter Port Groups.

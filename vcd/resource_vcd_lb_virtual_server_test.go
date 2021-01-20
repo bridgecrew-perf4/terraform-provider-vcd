@@ -260,7 +260,7 @@ resource "vcd_lb_app_rule" "redirect" {
   edge_gateway = "{{.EdgeGateway}}"
 
   name   = "redirect"
-  script = "acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page"
+  script = "acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page"
 }
 
 resource "vcd_lb_app_rule" "language" {

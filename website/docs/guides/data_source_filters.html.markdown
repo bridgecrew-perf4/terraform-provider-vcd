@@ -229,7 +229,7 @@ data "vcd_catalog_item" "unknown" {
   filter {
     metadata {
      key       = "vapp.origin.type"
-     value     = "com.lmicke.vcloud.entity.vapp"
+     value     = "com.vmware.vcloud.entity.vapp"
      is_system = true
     }
     metadata {

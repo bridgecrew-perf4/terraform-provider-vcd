@@ -201,7 +201,7 @@ func resourceVcdEdgeGatewayVpnCreate(d *schema.ResourceData, meta interface{}) e
 	tunnels[0] = tunnel
 
 	ipsecVPNConfig := &types.EdgeGatewayServiceConfiguration{
-		Xmlns: "http://www.lmicke.com/vcloud/v1.5",
+		Xmlns: "http://www.vmware.com/vcloud/v1.5",
 		GatewayIpsecVpnService: &types.GatewayIpsecVpnService{
 			IsEnabled: true,
 			Tunnel:    tunnels,
@@ -245,7 +245,7 @@ func resourceVcdEdgeGatewayVpnDelete(d *schema.ResourceData, meta interface{}) e
 	}
 
 	ipsecVPNConfig := &types.EdgeGatewayServiceConfiguration{
-		Xmlns: "http://www.lmicke.com/vcloud/v1.5",
+		Xmlns: "http://www.vmware.com/vcloud/v1.5",
 		GatewayIpsecVpnService: &types.GatewayIpsecVpnService{
 			IsEnabled: false,
 		},

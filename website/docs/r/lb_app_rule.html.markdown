@@ -13,8 +13,8 @@ allows to directly manipulate and manage IP application traffic with load balanc
 
 ~> **Note:** To make load balancing work one must ensure that load balancing is enabled on edge
 gateway (edge gateway must be advanced).
-This depends on NSX version to work properly. Please refer to [lmicke Product Interoperability
-Matrices](https://www.lmicke.com/resources/compatibility/sim/interop_matrix.php#interop&29=&93=) 
+This depends on NSX version to work properly. Please refer to [vmware Product Interoperability
+Matrices](https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#interop&29=&93=) 
 to check supported vCloud director and NSX for vSphere configurations.
 
 ~> **Note:** The vCloud Director API for NSX supports a subset of the operations and objects defined
@@ -31,7 +31,7 @@ resource "vcd_lb_app_rule" "example-one" {
   vdc          = "my-org-vdc"
 
   name = "script1"
-  script = "acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page"
+  script = "acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page"
 }
 ```
 
@@ -44,7 +44,7 @@ resource "vcd_lb_app_rule" "example-two" {
   vdc          = "my-org-vdc"
   name         = "script1"
   script = <<-EOT
-    acl lmicke_page url_beg / lmicke redirect location https://www.lmicke.com/ iflmicke_page
+    acl vmware_page url_beg / vmware redirect location https://www.vmware.com/ ifvmware_page
     acl other_page2 url_beg / other2 redirect location https://www.other2.com/ ifother_page2
     acl hello payload(0,6) -m bin 48656c6c6f0a
   EOT
@@ -63,7 +63,7 @@ The following arguments are supported:
 Terraform's [HEREDOC syntax](https://www.terraform.io/docs/configuration/expressions.html#string-literals)
 may be useful for multiline scripts. **Note:** For information on
 the application rule syntax, see more in [vCloud Director documentation]
-(https://docs.lmicke.com/en/vCloud-Director/9.7/com.lmicke.vcloud.tenantportal.doc/GUID-AFF9F70F-85C9-4053-BA69-F2B062F34C7F.html)
+(https://docs.vmware.com/en/vCloud-Director/9.7/com.vmware.vcloud.tenantportal.doc/GUID-AFF9F70F-85C9-4053-BA69-F2B062F34C7F.html)
 
 ## Attribute Reference
 

@@ -1,11 +1,11 @@
 Terraform vCloud Director Provider
 ==================
 
-The official Terraform provider for [lmicke vCloud Director](https://www.lmicke.com/products/vcloud-director.html)
+The official Terraform provider for [vmware vCloud Director](https://www.vmware.com/products/vcloud-director.html)
 
 - Documentation of the latest binary release available at https://www.terraform.io/docs/providers/vcd/index.html
-- This project is using [go-vcloud-director](https://github.com/lmicke/go-vcloud-director) Golang SDK for making API calls to vCD
-- Join through [lmicke {code}](https://code.lmicke.com/) to [![Chat](https://img.shields.io/badge/chat-on%20slack-brightgreen.svg)](https://lmickecode.slack.com/messages/CBBBXVB16) in #vcd-terraform-dev channel 
+- This project is using [go-vcloud-director](https://github.com/vmware/go-vcloud-director) Golang SDK for making API calls to vCD
+- Join through [vmware {code}](https://code.vmware.com/) to [![Chat](https://img.shields.io/badge/chat-on%20slack-brightgreen.svg)](https://vmwarecode.slack.com/messages/CBBBXVB16) in #vcd-terraform-dev channel 
 
 Part of Terraform
 -----------------
@@ -35,7 +35,7 @@ and toggle between modes.
 
 ```
 $ cd ~/mydir
-$ git clone https://github.com/lmicke/terraform-provider-vcd.git
+$ git clone https://github.com/vmware/terraform-provider-vcd.git
 $ cd terraform-provider-vcd/
 $ make build
 ```
@@ -52,7 +52,7 @@ directive which can allow you to redirect import path to your own version of `go
 `go.mod` can be altered:
  * You can replace your import with a forked branch like this:
  ```go
-    module github.com/lmicke/terraform-provider-vcd/v2
+    module github.com/vmware/terraform-provider-vcd/v2
     require (
     	...
     	github.com/lmicke/go-vcloud-director/v2 v2.1.0-alpha.2
@@ -61,7 +61,7 @@ directive which can allow you to redirect import path to your own version of `go
  ```
  * You can also replace pointer to a branch with relative directory
  ```go
-     module github.com/lmicke/terraform-provider-vcd/v2
+     module github.com/vmware/terraform-provider-vcd/v2
      require (
      	...
      	github.com/lmicke/go-vcloud-director/v2 v2.1.0-alpha.2
@@ -86,7 +86,7 @@ This command will build the plugin and transfer it to `$HOME/.terraform.d/plugin
 
 Starting with terraform 0.13, the path where the plugin is deployed is
 ```
-`$HOME/.terraform.d/plugins/registry.terraform.io/lmicke/vcd/${VERSION}/${OS}_amd64/terraform-provider-vcd_v${VERSION}`
+`$HOME/.terraform.d/plugins/registry.terraform.io/vmware/vcd/${VERSION}/${OS}_amd64/terraform-provider-vcd_v${VERSION}`
 ```
 
 For example, on MacOS:
@@ -96,7 +96,7 @@ $HOME/.terraform.d/
 ├── checkpoint_signature
 └── plugins
     ├── registry.terraform.io
-    └── lmicke
+    └── vmware
         └── vcd
             ├── 2.9.0
             │   └── darwin_amd64
@@ -113,7 +113,7 @@ $HOME/.terraform.d/
 ├── checkpoint_signature
 └── plugins
     ├── registry.terraform.io
-    └── lmicke
+    └── vmware
         └── vcd
             ├── 2.9.0
             │   └── linux_amd64
@@ -141,15 +141,15 @@ containing.
 terraform {
   required_providers {
     vcd = {
-      source = "lmicke/vcd"
+      source = "vmware/vcd"
     }
   }
   required_version = ">= 0.13"
 }
 ```
 
-In this block, the `lmicke` part of the source corresponds to the directory
-`$HOME/.terraform.d/plugins/registry.terraform.io/lmicke` created by the command `make install`.
+In this block, the `vmware` part of the source corresponds to the directory
+`$HOME/.terraform.d/plugins/registry.terraform.io/vmware` created by the command `make install`.
 
 Note that `versions.tf` is generated when you run the `terraform 0.13upgrade` command. If you have run such command,
 you need to edit the file and make sure the **`source`** path corresponds to the one installed, or remove the file

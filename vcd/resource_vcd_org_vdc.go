@@ -1036,7 +1036,7 @@ func getVcdVdcInput(d *schema.ResourceData, vcdClient *VCDClient) (*types.VdcCon
 
 	params := &types.VdcConfiguration{
 		Name:            d.Get("name").(string),
-		Xmlns:           "http://www.lmicke.com/vcloud/v1.5",
+		Xmlns:           "http://www.vmware.com/vcloud/v1.5",
 		AllocationModel: d.Get("allocation_model").(string),
 		ComputeCapacity: []*types.ComputeCapacity{
 			&types.ComputeCapacity{

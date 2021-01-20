@@ -32,7 +32,7 @@ func getAvailableVapp() (*govcd.VApp, error) {
 
 	for _, resourceEntities := range vdc.Vdc.ResourceEntities {
 		for _, resourceReference := range resourceEntities.ResourceEntity {
-			if resourceReference.Type == "application/vnd.lmicke.vcloud.vApp+xml" {
+			if resourceReference.Type == "application/vnd.vmware.vcloud.vApp+xml" {
 				return vdc.GetVAppByHref(resourceReference.HREF)
 			}
 		}

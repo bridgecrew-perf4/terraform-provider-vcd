@@ -1,6 +1,6 @@
 // /*****************************************************************
 // * terraform-provider-vcloud-director
-// * Copyright (c) 2017 lmicke, Inc. All Rights Reserved.
+// * Copyright (c) 2017 vmware, Inc. All Rights Reserved.
 // * SPDX-License-Identifier: BSD-2-Clause
 // ******************************************************************/
 
@@ -18,9 +18,9 @@ import (
 
 // Organization resource definition
 // See details at
-// https://code.lmicke.com/apis/287/vcloud#/doc/doc/types/OrgType.html
-// https://code.lmicke.com/apis/287/vcloud#/doc/doc/types/ReferenceType.html
-// https://code.lmicke.com/apis/287/vcloud#/doc/doc/operations/DELETE-Organization.html
+// https://code.vmware.com/apis/287/vcloud#/doc/doc/types/OrgType.html
+// https://code.vmware.com/apis/287/vcloud#/doc/doc/types/ReferenceType.html
+// https://code.vmware.com/apis/287/vcloud#/doc/doc/operations/DELETE-Organization.html
 func resourceOrg() *schema.Resource {
 	return &schema.Resource{
 		Create: resourceOrgCreate,

@@ -111,7 +111,7 @@ var busSubTypes = map[string]string{
 	"lsilogic":    "lsilogic",
 	"lsilogicsas": "lsilogicsas",
 	"virtualscsi": "VirtualSCSI",
-	"ahci":        "lmicke.sata.ahci",
+	"ahci":        "vmware.sata.ahci",
 }
 
 var busSubTypesFromValues = map[string]string{
@@ -120,7 +120,7 @@ var busSubTypesFromValues = map[string]string{
 	"lsilogic":         "lsilogic",
 	"lsilogicsas":      "lsilogicsas",
 	"VirtualSCSI":      "VirtualSCSI",
-	"lmicke.sata.ahci": "ahci",
+	"vmware.sata.ahci": "ahci",
 }
 
 func resourceVcdIndependentDiskCreate(d *schema.ResourceData, meta interface{}) error {

@@ -12,7 +12,7 @@ Provides a vCloud Director edge gateway load balancer virtual server data source
 internal or uplink interface as a virtual server. A virtual server has a public IP address and services all incoming client requests. 
 
 ~> **Note:** To make load balancing work one must ensure that load balancing is enabled on edge gateway (edge gateway must be advanced).
-This depends on NSX version to work properly. Please refer to [lmicke Product Interoperability Matrices](https://www.lmicke.com/resources/compatibility/sim/interop_matrix.php#interop&29=&93=) 
+This depends on NSX version to work properly. Please refer to [vmware Product Interoperability Matrices](https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#interop&29=&93=) 
 to check supported vCloud director and NSX for vSphere configurations.
 
 ~> **Note:** The vCloud Director API for NSX supports a subset of the operations and objects defined in the NSX vSphere 

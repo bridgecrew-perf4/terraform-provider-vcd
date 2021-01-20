@@ -1,6 +1,6 @@
 ---
 layout: "vcd"
-page_title: "lmicke Cloud Director: vcd_vcenter"
+page_title: "vmware Cloud Director: vcd_vcenter"
 sidebar_current: "docs-vcd-data-source-vcenter"
 description: |-
   Provides a data source for vCenter server attached to VCD.

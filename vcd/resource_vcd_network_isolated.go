@@ -197,7 +197,7 @@ func resourceVcdNetworkIsolatedCreate(d *schema.ResourceData, meta interface{}) 
 	}
 
 	orgVDCNetwork := &types.OrgVDCNetwork{
-		Xmlns:       "http://www.lmicke.com/vcloud/v1.5",
+		Xmlns:       "http://www.vmware.com/vcloud/v1.5",
 		Name:        networkName,
 		Description: d.Get("description").(string),
 		Configuration: &types.NetworkConfiguration{

@@ -13,7 +13,7 @@ servers set (defined as pool members), manages load balancer distribution method
 attached to it for health check parameters.
 
 ~> **Note:** To make load balancing work one must ensure that load balancing is enabled on edge gateway. This depends 
-on NSX version to work properly. Please refer to [lmicke Product Interoperability Matrices](https://www.lmicke.com/resources/compatibility/sim/interop_matrix.php#interop&29=&93=) 
+on NSX version to work properly. Please refer to [vmware Product Interoperability Matrices](https://www.vmware.com/resources/compatibility/sim/interop_matrix.php#interop&29=&93=) 
 to check supported vCloud director and NSX for vSphere configurations.
 
 ~> **Note:** The vCloud Director API for NSX supports a subset of the operations and objects defined in the NSX vSphere 

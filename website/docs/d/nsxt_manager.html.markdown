@@ -1,6 +1,6 @@
 ---
 layout: "vcd"
-page_title: "lmicke Cloud Director: vcd_nsxt_manager"
+page_title: "vmware Cloud Director: vcd_nsxt_manager"
 sidebar_current: "docs-vcd-data-source-nsxt-manager"
 description: |-
   Provides a data source for available NSX-T manager.
@@ -12,8 +12,8 @@ Provides a data source for NSX-T manager.
 
 Supported in provider *v3.0+*
 
-~> **Note:** This resource uses new lmicke Cloud Director
-[OpenAPI](https://code.lmicke.com/docs/11982/getting-started-with-lmicke-cloud-director-openapi) and
+~> **Note:** This resource uses new vmware Cloud Director
+[OpenAPI](https://code.vmware.com/docs/11982/getting-started-with-vmware-cloud-director-openapi) and
 requires at least VCD *10.1.1+* and NSX-T *3.0+*.
 
 ## Example Usage 

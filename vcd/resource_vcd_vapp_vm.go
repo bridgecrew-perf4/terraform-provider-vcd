@@ -1768,7 +1768,7 @@ func readNetworks(d *schema.ResourceData, vm govcd.VM, vapp govcd.VApp) ([]map[s
 		return []map[string]interface{}{}, fmt.Errorf("error getting vApp networks: %s", err)
 	}
 	// If vApp network is "isolated" and has no ParentNetwork - it is a vApp network.
-	// https://code.lmicke.com/apis/72/vcloud/doc/doc/types/NetworkConfigurationType.html
+	// https://code.vmware.com/apis/72/vcloud/doc/doc/types/NetworkConfigurationType.html
 	vAppNetworkTypes := make(map[string]string)
 	for _, netConfig := range vAppNetworkConfig.NetworkConfig {
 		switch {
