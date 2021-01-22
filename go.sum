@@ -218,6 +218,8 @@ github.com/hashicorp/terraform-plugin-sdk v1.16.0 h1:NrkXMRjHErUPPTHQkZ6JIn6bByi
 github.com/hashicorp/terraform-plugin-sdk/v2 v2.2.0 h1:2m4uKA97R8ijHGLwhHdpSJyI8Op1FpS/ozpoF21jK7s=
 github.com/hashicorp/terraform-plugin-sdk/v2 v2.2.0/go.mod h1:+12dJQebYjuU/yiq94iZUPuC66abfRBrXdpVJia3ojk=
 github.com/hashicorp/terraform-plugin-sdk/v2 v2.3.0 h1:Egv+R1tOOjPNz643KBTx3tLT6RdFGGYJcZlyLvrPcEU=
+github.com/hashicorp/terraform-plugin-sdk/v2 v2.4.0 h1:2c+vG46celrDCsfYEIzaXxvBaAXCqlVG77LwtFz8cfs=
+github.com/hashicorp/terraform-plugin-sdk/v2 v2.4.1 h1:k2rpom9wG2cdi5iLRH80EdQB7UX/E6UzYzUfzgsNLuU=
 github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb h1:b5rjCoWHc7eqmAS4/qyk21ZsHyb6Mxv/jykxvNTkU4M=
 github.com/hashicorp/yamux v0.0.0-20180604194846-3520598351bb/go.mod h1:+NfK9FKeTrX5uv1uIXGdwYDTeHna2qgaIlx54MXqjAM=
 github.com/hashicorp/yamux v0.0.0-20181012175058-2f1d1f20f75d h1:kJCB4vdITiW1eC1vq2e6IsrXKrZit1bv/TDYFGMp4BQ=
@@ -295,6 +297,8 @@ github.com/lmicke/go-vcloud-director/v2 v2.11.22 h1:u2Ixq6HL5UlE8KnjarzCQjsU2IC6
 github.com/lmicke/go-vcloud-director/v2 v2.11.22/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
 github.com/lmicke/go-vcloud-director/v2 v2.11.23 h1:aK6I+N90nmnk1lcCZvmvHH5Fz+Qz00dKcHD3qFadOew=
 github.com/lmicke/go-vcloud-director/v2 v2.11.23/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
+github.com/lmicke/go-vcloud-director/v2 v2.11.24 h1:JpZyqvxbfu1xeD/mH2JakbzOYgNCah4x9sIcqGAfV0U=
+github.com/lmicke/go-vcloud-director/v2 v2.11.24/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
 github.com/mattn/go-colorable v0.0.9 h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRUIY4=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-isatty v0.0.3/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
