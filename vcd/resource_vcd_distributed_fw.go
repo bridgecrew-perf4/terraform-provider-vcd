@@ -15,8 +15,7 @@ var appliedResource = &schema.Resource{
 	Schema: map[string]*schema.Schema{
 		"name": {
 			Type:        schema.TypeString,
-			Optional:    true,
-			Default:     "",
+			Computed:    true,
 			Description: "Name of the Firewall Object",
 		},
 		"value": {
@@ -38,10 +37,10 @@ var appliedResource = &schema.Resource{
 
 var ruleResource = &schema.Resource{
 	Schema: map[string]*schema.Schema{
-		"order": {
+		"priority": {
 			Type:        schema.TypeInt,
 			Required:    true,
-			Description: "Order of Firewall Rules from bottom to top",
+			Description: "Priority of Firewall Rules from bottom to top",
 		},
 		"action": {
 			Type:        schema.TypeString,
@@ -49,18 +48,24 @@ var ruleResource = &schema.Resource{
 			Description: "Action of the Firewall: allow, deny",
 		},
 		"applied_to": {
-			Type: schema.TypeSet,
-			Elem: appliedResource,
+			Type:     schema.TypeSet,
+			Elem:     appliedResource,
+			Required: true,
 		},
 		"direction": {
 			Type:        schema.TypeString,
 			Required:    true,
-			Description: "Direction of Firewall Rule",
+			Description: "Direction of Firewall Rule: in, out, inout",
 		},
 		"name": {
 			Type:        schema.TypeString,
 			Required:    true,
 			Description: "Name of the Firewall Rule",
+		},
+		"id": {
+			Type:        schema.TypeInt,
+			Computed:    true,
+			Description: "ID of the Firewall Rule",
 		},
 		"disabled": {
 			Type:     schema.TypeBool,
@@ -89,7 +94,7 @@ func resourceVcdVdcDFW() *schema.Resource {
 		Update: resourceVcdDFWUpdate,
 
 		Schema: map[string]*schema.Schema{
-			"priority": {
+			"org": {
 				Type:     schema.TypeString,
 				Optional: true,
 				ForceNew: true,
@@ -116,8 +121,9 @@ func resourceVcdVdcDFW() *schema.Resource {
 				Optional: true,
 			},
 			"rule": {
-				Type: schema.TypeSet,
-				Elem: ruleResource,
+				Type:     schema.TypeSet,
+				Elem:     ruleResource,
+				Optional: true,
 			},
 		},
 	}
@@ -195,15 +201,16 @@ func resourceVcdDFWRead(d *schema.ResourceData, meta interface{}) error {
 
 	rules := dfw.Section.Rules
 	var ruleList []interface{}
-	for _, rule := range rules {
+	for key, rule := range rules {
 		ruleMap := make(map[string]interface{})
-		// Does Order get Set Perhaps ToDo
+		ruleMap["priority"] = len(rules) - key
 		ruleMap["action"] = rule.Action
 		ruleMap["name"] = rule.Name
 		ruleMap["direction"] = rule.Direction
 		ruleMap["packet_type"] = rule.PacketType
 		ruleMap["disabled"] = rule.Disabled
 		ruleMap["logged"] = rule.Logged
+		ruleMap["id"] = rule.ID
 
 		// Applied_to_set
 		var appliedList []interface{}
@@ -234,6 +241,58 @@ func resourceVcdDFWRead(d *schema.ResourceData, meta interface{}) error {
 
 //resourceVcdVdcUpdate function updates resource with found configurations changes
 func resourceVcdDFWUpdate(d *schema.ResourceData, meta interface{}) error {
+	/*
+		vcdClient := meta.(*VCDClient)
+		//Init VDCDWF Object
+		dfw := govcd.NewDFW(&vcdClient.Client)
+
+		firewallEnabled, err := dfw.CheckDistributedFirewall(d.Get("vdc_id").(string))
+		if err != nil {
+			return err
+		}
+		if !firewallEnabled {
+			return fmt.Errorf("Distributed Firewall is not enabled.")
+		}
+
+		rules, ok := d.Get("rule").(*schema.Set)
+		if !ok {
+			return fmt.Errorf("[DEBUG] Unsupported Type: %T\n", rules)
+		}
+
+		ruleList := rules.List()
+		var newRules map[int]govcd.DFWRule
+		newRules = make(map[int]govcd.DFWRule)
+
+		//Get and Set Rules
+		for key, value := range ruleList {
+			ruleValues := value.(map[string]interface{})
+
+			// Check it all
+			if ruleValues["id"] != dfw.Section.Rules[key].ID {
+				// Add new Rule to dfw.Section.Rules with correct status
+				rule := govcd.DFWRule{}
+				ruleValues := value.(map[string]interface{})
+				rule.Action = ruleValues["action"].(string)
+				rule.Name = ruleValues["name"].(string)
+				rule.Direction = ruleValues["direction"].(string)
+				rule.PacketType = ruleValues["packet_type"].(string)
+				rule.Disabled = ruleValues["disabled"].(bool)
+				rule.Logged = ruleValues["logged"].(bool)
+				newRules[ruleValues["priority"].(int)] = rule
+
+			} else {
+				// Set the fields again with the provided values
+				dfw.Section.Rules[key].Action = ruleValues["action"].(string)
+				dfw.Section.Rules[key].Name = ruleValues["name"].(string)
+				dfw.Section.Rules[key].Direction = ruleValues["direction"].(string)
+				dfw.Section.Rules[key].PacketType = ruleValues["packet_type"].(string)
+				dfw.Section.Rules[key].Disabled = ruleValues["disabled"].(bool)
+				dfw.Section.Rules[key].Logged = ruleValues["logged"].(bool)
+
+			}
+
+		}
+	*/
 
 	return resourceVcdDFWCreate(d, meta)
 }
@@ -282,23 +341,49 @@ func changeFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 		}
 		appliedList := appliedTo.List()
 
-		var dfwAppliedTo []govcd.DFWApplied
+		var dfwAppliedTo []govcd.DFWAppliedTo
 
 		for _, value := range appliedList {
-			appliedStruct := govcd.DFWApplied{}
 			appliedValues := value.(map[string]interface{})
 
 			//Set applied_Settings
-			appliedStruct.Name = appliedValues["name"].(string)
-			appliedStruct.Value = appliedValues["value"].(string)
-			appliedStruct.Type = appliedValues["type"].(string)
+			appliedStruct := govcd.DFWApplied{
+				//Name:    appliedValues["name"].(string),
+				Value:   appliedValues["value"].(string),
+				Type:    appliedValues["type"].(string),
+				//IsValid: true,
+			}
 
-			dfwAppliedTo = append(dfwAppliedTo, appliedStruct)
+
+			appliedStructTo := govcd.DFWAppliedTo{ID: appliedStruct}
+			log.Printf("Total Applied To: %+v", appliedStructTo)
+
+			dfwAppliedTo = append(dfwAppliedTo, appliedStructTo)
 		}
+		rule.AppliedToList = dfwAppliedTo
+		log.Printf("Total Rule: %+v", rule)
 
 		rulemap[ruleValues["priority"].(int)] = rule
 
 	}
+
+
+		defaultApplied := govcd.DFWApplied{
+			Value: d.Get("vdc_id").(string),
+			Type:  "VDC",
+		}
+			defaultRule := govcd.DFWRule{
+				Name:       "Default Deny",
+				Action:     "deny",
+				Direction:  "inout",
+				PacketType: "any",
+				AppliedToList: []govcd.DFWAppliedTo{govcd.DFWAppliedTo{
+					ID: defaultApplied,
+				},
+				},
+			}
+
+			rulemap[-1] = defaultRule
 
 	//Sort Firewall Rules by priority and insert into DFW
 	keys := make([]int, len(rulemap))
@@ -307,15 +392,15 @@ func changeFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 		keys[i] = k
 		i++
 	}
-	sort.Ints(keys)
+	sort.Sort(sort.Reverse(sort.IntSlice(keys)))
 
 	sortedRules := make([]govcd.DFWRule, len(rulemap))
 	for key, value := range keys {
 		sortedRules[key] = rulemap[value]
 	}
-	for _, value := range sortedRules {
-		dfw.Section.Rules = append(dfw.Section.Rules, value)
-	}
+
+	dfw.Section.Rules = sortedRules
+	log.Printf("Total struct for Rules: %+v", dfw.Section.Rules)
 
 	return dfw, nil
 }
