@@ -9,4 +9,4 @@ require (
 	github.com/lmicke/go-vcloud-director/v2 v2.11.27
 )
 
-//replace github.com/lmicke/go-vcloud-director/v2 => ../go-vcloud-director/
+replace github.com/lmicke/go-vcloud-director/v2 => ../go-vcloud-director/

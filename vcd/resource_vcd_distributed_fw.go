@@ -34,6 +34,75 @@ var appliedResource = &schema.Resource{
 		},
 	},
 }
+var sources = &schema.Resource{
+	Schema: map[string]*schema.Schema{
+		"name": {
+			Type:        schema.TypeString,
+			Computed:    true,
+			Description: "Name of the Firewall Object",
+		},
+		"value": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "Identifier of affected Object",
+		},
+		"type": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "Type of affected Object, ex. SG, VM,",
+		},
+		"is_valid": {
+			Type:     schema.TypeBool,
+			Computed: true,
+		},
+	},
+}
+var destinations = &schema.Resource{
+	Schema: map[string]*schema.Schema{
+		"name": {
+			Type:        schema.TypeString,
+			Computed:    true,
+			Description: "Name of the Firewall Object",
+		},
+		"value": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "Identifier of affected Object",
+		},
+		"type": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "Type of affected Object, ex. SG, VM,",
+		},
+		"is_valid": {
+			Type:     schema.TypeBool,
+			Computed: true,
+		},
+	},
+}
+var services = &schema.Resource{
+	Schema: map[string]*schema.Schema{
+		"name": {
+			Type:        schema.TypeString,
+			Computed:    true,
+			Description: "Name of the Firewall Object",
+		},
+		"value": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "Identifier of affected Object",
+		},
+		"type": {
+			Type:        schema.TypeString,
+			Required:    true,
+			Description: "Type of affected Object, ex. SG, VM,",
+		},
+		"is_valid": {
+			Type:     schema.TypeBool,
+			Computed: true,
+		},
+	},
+}
 
 var ruleResource = &schema.Resource{
 	Schema: map[string]*schema.Schema{
@@ -51,6 +120,21 @@ var ruleResource = &schema.Resource{
 			Type:     schema.TypeSet,
 			Elem:     appliedResource,
 			Required: true,
+		},
+		"sources": {
+			Type:     schema.TypeSet,
+			Elem:     sources,
+			Optional: true,
+		},
+		"destinations": {
+			Type:     schema.TypeSet,
+			Elem:     destinations,
+			Optional: true,
+		},
+		"services": {
+			Type:     schema.TypeSet,
+			Elem:     services,
+			Optional: true,
 		},
 		"direction": {
 			Type:        schema.TypeString,
@@ -168,7 +252,7 @@ func resourceVcdDFWCreate(d *schema.ResourceData, meta interface{}) error {
 	log.Printf("[DEBUG] XML-Response: %+v\n", dfw.Section)
 
 	//Change Fields:
-	dfw, err = changeFirewallRules(d, dfw)
+	dfw, err = createFirewallRules(d, dfw)
 	if err != nil {
 		return err
 	}
@@ -215,13 +299,12 @@ func resourceVcdDFWRead(d *schema.ResourceData, meta interface{}) error {
 		// Applied_to_set
 		var appliedList []interface{}
 
-		for _, applied := range rule.AppliedToList {
+		for _, applied := range rule.AppliedToList.Applied {
 			appliedMap := make(map[string]interface{})
-
-			appliedMap["name"] = applied.ID.Name
-			appliedMap["value"] = applied.ID.Value
-			appliedMap["type"] = applied.ID.Type
-			appliedMap["is_valid"] = applied.ID.IsValid
+			appliedMap["name"] = applied.Name
+			appliedMap["value"] = applied.Value
+			appliedMap["type"] = applied.Type
+			appliedMap["is_valid"] = applied.IsValid
 
 			appliedList = append(appliedList, appliedMap)
 		}
@@ -312,7 +395,7 @@ func resourceVcdDFWDelete(d *schema.ResourceData, meta interface{}) error {
 	return nil
 }
 
-func changeFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, error) {
+func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, error) {
 	rules, ok := d.Get("rule").(*schema.Set)
 	if !ok {
 		return dfw, fmt.Errorf("[DEBUG] Unsupported Type: %T\n", rules)
@@ -335,55 +418,44 @@ func changeFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 		rule.Disabled = ruleValues["disabled"].(bool)
 		rule.Logged = ruleValues["logged"].(bool)
 
-		appliedTo := ruleValues["applied_to"].(*schema.Set)
-		if !ok {
-			return dfw, fmt.Errorf("[DEBUG] Unsupported Type: %T\n", rules)
-		}
-		appliedList := appliedTo.List()
-
-		var dfwAppliedTo []govcd.DFWAppliedTo
-
-		for _, value := range appliedList {
-			appliedValues := value.(map[string]interface{})
-
-			//Set applied_Settings
-			appliedStruct := govcd.DFWApplied{
-				//Name:    appliedValues["name"].(string),
-				Value:   appliedValues["value"].(string),
-				Type:    appliedValues["type"].(string),
-				//IsValid: true,
+		sourceMap, exists := ruleValues["sources"]
+		if exists {
+			sources, err := createAppliedList(sourceMap)
+			if err != nil {
+				return nil, err
 			}
-
-
-			appliedStructTo := govcd.DFWAppliedTo{ID: appliedStruct}
-			log.Printf("Total Applied To: %+v", appliedStructTo)
-
-			dfwAppliedTo = append(dfwAppliedTo, appliedStructTo)
+			rule.Sources.Source = sources
 		}
-		rule.AppliedToList = dfwAppliedTo
-		log.Printf("Total Rule: %+v", rule)
+		destinationsMap, exists := ruleValues["destinations"]
+		if exists {
+			destinations, err := createAppliedList(destinationsMap)
+			if err != nil {
+				return nil, err
+			}
+			rule.Destinations.Destination = destinations
+		}
+
+		serviceMap, exists := ruleValues["services"]
+		if exists {
+			services, err := createAppliedList(serviceMap)
+			if err != nil {
+				return nil, err
+			}
+			rule.Services.Service = services
+		}
+
+		appliedMap, exists := ruleValues["sources"]
+		if exists {
+			applied, err := createAppliedList(appliedMap)
+			if err != nil {
+				return nil, err
+			}
+			rule.AppliedToList.Applied = applied
+		}
 
 		rulemap[ruleValues["priority"].(int)] = rule
 
 	}
-
-
-		defaultApplied := govcd.DFWApplied{
-			Value: d.Get("vdc_id").(string),
-			Type:  "VDC",
-		}
-			defaultRule := govcd.DFWRule{
-				Name:       "Default Deny",
-				Action:     "deny",
-				Direction:  "inout",
-				PacketType: "any",
-				AppliedToList: []govcd.DFWAppliedTo{govcd.DFWAppliedTo{
-					ID: defaultApplied,
-				},
-				},
-			}
-
-			rulemap[-1] = defaultRule
 
 	//Sort Firewall Rules by priority and insert into DFW
 	keys := make([]int, len(rulemap))
@@ -403,4 +475,26 @@ func changeFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 	log.Printf("Total struct for Rules: %+v", dfw.Section.Rules)
 
 	return dfw, nil
+}
+
+func createAppliedList(ruleValues interface{}) ([]govcd.DFWApplied, error) {
+	applied, ok := ruleValues.(*schema.Set)
+	if !ok {
+		return nil, fmt.Errorf("[DEBUG] Unsupported Type: %T\n", sources)
+	}
+	appliedList := applied.List()
+
+	var dfwApplied []govcd.DFWApplied
+
+	for _, value := range appliedList {
+		appliedValues := value.(map[string]interface{})
+
+		//Set applied_Settings
+		appliedStruct := govcd.DFWApplied{
+			Value: appliedValues["value"].(string),
+			Type:  appliedValues["type"].(string),
+		}
+		dfwApplied = append(dfwApplied, appliedStruct)
+	}
+	return dfwApplied, nil
 }
