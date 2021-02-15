@@ -185,21 +185,21 @@ func resourceVcdVdcDFW() *schema.Resource {
 				Description: "The name of organization to use, optional if defined at provider " +
 					"level. Useful when connected as sysadmin working across different organizations",
 			},
-			"name": &schema.Schema{
+			"name": {
 				Type:     schema.TypeString,
 				Required: true,
 			},
-			"description": &schema.Schema{
+			"description": {
 				Type:     schema.TypeString,
 				Optional: true,
 			},
 
-			"vdc_id": &schema.Schema{
+			"vdc_id": {
 				Type:        schema.TypeString,
 				Required:    true,
 				Description: "ID of the VDC",
 			},
-			"type": &schema.Schema{
+			"type": {
 				Type:     schema.TypeString,
 				Computed: true,
 				Optional: true,
@@ -247,7 +247,7 @@ func resourceVcdDFWCreate(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	if !firewallEnabled {
-		return fmt.Errorf("Distributed Firewall is not enabled.")
+		return fmt.Errorf("distributed Firewall is not enabled")
 	}
 	log.Printf("[DEBUG] XML-Response: %+v\n", dfw.Section)
 
@@ -278,7 +278,7 @@ func resourceVcdDFWRead(d *schema.ResourceData, meta interface{}) error {
 		return err
 	}
 	if !firewallEnabled {
-		return fmt.Errorf("Distributed Firewall is not enabled.")
+		return fmt.Errorf("distributed Firewall is not enabled")
 	}
 
 	_ = d.Set("type", dfw.Section.Type)
@@ -444,7 +444,7 @@ func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 			rule.Services.Service = services
 		}
 
-		appliedMap, exists := ruleValues["sources"]
+		appliedMap, exists := ruleValues["applied_to"]
 		if exists {
 			applied, err := createAppliedList(appliedMap)
 			if err != nil {
