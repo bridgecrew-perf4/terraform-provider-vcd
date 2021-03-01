@@ -204,7 +204,7 @@ func resourceVcdVdcDFW() *schema.Resource {
 				Computed: true,
 				Optional: true,
 			},
-			"rule": {
+			"rules": {
 				Type:     schema.TypeSet,
 				Elem:     ruleResource,
 				Optional: true,
@@ -295,26 +295,23 @@ func resourceVcdDFWRead(d *schema.ResourceData, meta interface{}) error {
 		ruleMap["disabled"] = rule.Disabled
 		ruleMap["logged"] = rule.Logged
 		ruleMap["id"] = rule.ID
+		ruleMap["applied_to"] = readAppliedList(rule.AppliedToList.Applied)
 
-		// Applied_to_set
-		var appliedList []interface{}
-
-		for _, applied := range rule.AppliedToList.Applied {
-			appliedMap := make(map[string]interface{})
-			appliedMap["name"] = applied.Name
-			appliedMap["value"] = applied.Value
-			appliedMap["type"] = applied.Type
-			appliedMap["is_valid"] = applied.IsValid
-
-			appliedList = append(appliedList, appliedMap)
+		if rule.Services != nil {
+			ruleMap["services"] = readAppliedList(rule.Services.Service)
 		}
-		appliedSet := schema.NewSet(schema.HashResource(appliedResource), appliedList)
-		ruleMap["applied_to"] = appliedSet
+		if rule.Sources != nil {
+			ruleMap["sources"] = readAppliedList(rule.Sources.Source)
+		}
+		if rule.Destinations != nil {
+			ruleMap["destinations"] = readAppliedList(rule.Destinations.Destination)
+		}
 
 		ruleList = append(ruleList, ruleMap)
 	}
+	// Could we do ordering here no we cant?
 	ruleSet := schema.NewSet(schema.HashResource(ruleResource), ruleList)
-	err = d.Set("rule", ruleSet)
+	err = d.Set("rules", ruleSet)
 	if err != nil {
 		return fmt.Errorf("[distributed Firewall read]  could not set rules block: %s", err)
 	}
@@ -396,7 +393,7 @@ func resourceVcdDFWDelete(d *schema.ResourceData, meta interface{}) error {
 }
 
 func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, error) {
-	rules, ok := d.Get("rule").(*schema.Set)
+	rules, ok := d.Get("rules").(*schema.Set)
 	if !ok {
 		return dfw, fmt.Errorf("[DEBUG] Unsupported Type: %T\n", rules)
 	}
@@ -418,40 +415,44 @@ func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 		rule.Disabled = ruleValues["disabled"].(bool)
 		rule.Logged = ruleValues["logged"].(bool)
 
-		sourceMap, exists := ruleValues["sources"]
-		if exists {
-			sources, err := createAppliedList(sourceMap)
-			if err != nil {
-				return nil, err
-			}
-			rule.Sources.Source = sources
+		sourceMap := ruleValues["sources"]
+		sources, err := createAppliedList(sourceMap)
+		if err != nil {
+			return nil, err
 		}
-		destinationsMap, exists := ruleValues["destinations"]
-		if exists {
-			destinations, err := createAppliedList(destinationsMap)
-			if err != nil {
-				return nil, err
-			}
-			rule.Destinations.Destination = destinations
+		if len(sources) > 0 {
+			source := govcd.Sources{}
+			source.Source = sources
+			rule.Sources = &source
 		}
-
-		serviceMap, exists := ruleValues["services"]
-		if exists {
-			services, err := createAppliedList(serviceMap)
-			if err != nil {
-				return nil, err
-			}
-			rule.Services.Service = services
+		destinationsMap := ruleValues["destinations"]
+		destinations, err := createAppliedList(destinationsMap)
+		if err != nil {
+			return nil, err
+		}
+		if len(destinations) > 0 {
+			destination := govcd.Destinations{}
+			destination.Destination = destinations
+			rule.Destinations = &destination
 		}
 
-		appliedMap, exists := ruleValues["applied_to"]
-		if exists {
-			applied, err := createAppliedList(appliedMap)
-			if err != nil {
-				return nil, err
-			}
-			rule.AppliedToList.Applied = applied
+		serviceMap := ruleValues["services"]
+		services, err := createAppliedList(serviceMap)
+		if err != nil {
+			return nil, err
 		}
+		if len(services) > 0 {
+			service := govcd.Services{}
+			service.Service = services
+			rule.Services = &service
+		}
+
+		appliedMap := ruleValues["applied_to"]
+		applied, err := createAppliedList(appliedMap)
+		if err != nil {
+			return nil, err
+		}
+		rule.AppliedToList.Applied = applied
 
 		rulemap[ruleValues["priority"].(int)] = rule
 
@@ -497,4 +498,20 @@ func createAppliedList(ruleValues interface{}) ([]govcd.DFWApplied, error) {
 		dfwApplied = append(dfwApplied, appliedStruct)
 	}
 	return dfwApplied, nil
+}
+
+func readAppliedList(applieds []govcd.DFWApplied) *schema.Set {
+	var appliedList []interface{}
+
+	for _, applied := range applieds {
+		appliedMap := make(map[string]interface{})
+		appliedMap["name"] = applied.Name
+		appliedMap["value"] = applied.Value
+		appliedMap["type"] = applied.Type
+		appliedMap["is_valid"] = applied.IsValid
+
+		appliedList = append(appliedList, appliedMap)
+	}
+	return schema.NewSet(schema.HashResource(appliedResource), appliedList)
+
 }
