@@ -4,7 +4,7 @@ steps:
   args: ['go', 'build', '-o', 'terraform-provider-vcd_v${TAG_NAME}', '.']
 
 - name: eu.gcr.io/sandbox-terraform-provider/test-zip-gpg
-  args: ['terraform-provider-vcd_v${TAG_NAME}', '${TAG_NAME}', 'linux','amd64', 'vcd'] 
+  args: ['terraform-provider-vcd_v${TAG_NAME}', '${TAG_NAME}', 'linux','amd64', 'vcd']
 artifacts:
   objects:
     location: 'gs://terraform-provider-registry-sdms'

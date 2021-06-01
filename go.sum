@@ -305,6 +305,8 @@ github.com/lmicke/go-vcloud-director/v2 v2.11.27 h1:NORNhc9ZtBRwBBStX4eOIJK8mWrA
 github.com/lmicke/go-vcloud-director/v2 v2.11.27/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
 github.com/lmicke/go-vcloud-director/v2 v2.11.30 h1:TvzdtX6gmIGpXQwJVjJm8Md8FlX7kpSXj0IYFbYkgc4=
 github.com/lmicke/go-vcloud-director/v2 v2.11.30/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
+github.com/lmicke/go-vcloud-director/v2 v2.11.31 h1:En3LLb1DOmjTf+C39GAYd/rCVal81zI6Mu1XLjI1MsY=
+github.com/lmicke/go-vcloud-director/v2 v2.11.31/go.mod h1:vuXxgmgVw6pMQryZYNYZ1RKjknyqKInofn/NASIsbe4=
 github.com/mattn/go-colorable v0.0.9 h1:UVL0vNpWh04HeJXV0KLcaT7r06gOH2l4OW6ddYRUIY4=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-isatty v0.0.3/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=

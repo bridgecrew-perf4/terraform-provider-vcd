@@ -321,7 +321,8 @@ func resourceVcdDFWRead(d *schema.ResourceData, meta interface{}) error {
 
 //resourceVcdVdcUpdate function updates resource with found configurations changes
 func resourceVcdDFWUpdate(d *schema.ResourceData, meta interface{}) error {
-	/*
+	//ToDo: Check for Changes in existing fields and append new rules correctly l
+/*
 		vcdClient := meta.(*VCDClient)
 		//Init VDCDWF Object
 		dfw := govcd.NewDFW(&vcdClient.Client)
@@ -334,7 +335,7 @@ func resourceVcdDFWUpdate(d *schema.ResourceData, meta interface{}) error {
 			return fmt.Errorf("Distributed Firewall is not enabled.")
 		}
 
-		rules, ok := d.Get("rule").(*schema.Set)
+		rules, ok := d.Get("rules").(*schema.Set)
 		if !ok {
 			return fmt.Errorf("[DEBUG] Unsupported Type: %T\n", rules)
 		}
@@ -372,7 +373,7 @@ func resourceVcdDFWUpdate(d *schema.ResourceData, meta interface{}) error {
 			}
 
 		}
-	*/
+*/
 
 	return resourceVcdDFWCreate(d, meta)
 }
@@ -421,9 +422,9 @@ func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 			return nil, err
 		}
 		if len(sources) > 0 {
-			source := govcd.Sources{}
+			source := new(govcd.Sources)
 			source.Source = sources
-			rule.Sources = &source
+			rule.Sources = source
 		}
 		destinationsMap := ruleValues["destinations"]
 		destinations, err := createAppliedList(destinationsMap)
@@ -431,9 +432,9 @@ func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 			return nil, err
 		}
 		if len(destinations) > 0 {
-			destination := govcd.Destinations{}
+			destination := new(govcd.Destinations)
 			destination.Destination = destinations
-			rule.Destinations = &destination
+			rule.Destinations = destination
 		}
 
 		serviceMap := ruleValues["services"]
@@ -442,9 +443,9 @@ func createFirewallRules(d *schema.ResourceData, dfw *govcd.DFW) (*govcd.DFW, er
 			return nil, err
 		}
 		if len(services) > 0 {
-			service := govcd.Services{}
+			service := new(govcd.Services)
 			service.Service = services
-			rule.Services = &service
+			rule.Services = service
 		}
 
 		appliedMap := ruleValues["applied_to"]
